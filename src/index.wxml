@@ -1,0 +1,13 @@
+<picker
+  mode="multiSelector"
+  range="{{range}}"
+  disabled="{{disabled}}"
+  value="{{pickerValue}}"
+  bindcolumnchange="onColumnChange"
+  bindchange="onChange"
+  bindcancel="onCancel"
+>
+  <view class="box-class">
+    <slot />
+  </view>
+</picker>

@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "datetime-picker": "/components/datetime-picker/index"
+  }
+}

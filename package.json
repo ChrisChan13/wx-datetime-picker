@@ -1,0 +1,28 @@
+{
+  "name": "wx-datetime-picker",
+  "version": "1.0.0",
+  "description": "基于微信小程序原生多列选择器的日期时间选择器，用于选择日期时间，支持同时选择日期和时间。",
+  "main": "miniprogram_dist/index.js",
+  "miniprogram": "miniprogram_dist",
+  "scripts": {
+    "dev": "gulp dev --dev",
+    "clean-dev": "gulp clean --dev",
+    "clean": "gulp clean",
+    "build": "gulp"
+  },
+  "keywords": [
+    "datetime", "picker", "miniprogram"
+  ],
+  "author": "chrischan",
+  "license": "MIT",
+  "repository": "https://github.com/ChrisChan13/wx-datetime-picker.git",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.2"
+  },
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0"
+  }
+}
