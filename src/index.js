@@ -37,6 +37,11 @@ const UNITS = {
   [`${FIELDS.MINUTE}`]: '分',
   [`${FIELDS.SECOND}`]: '秒',
 };
+/** 选择器样式 */
+const MODES = {
+  PICKER: 'picker',
+  PICKER_VIEW: 'picker-view',
+};
 /** 部分默认值 */
 const DEFAULTS = {
   START: '1900-01-01 00:00:00',
@@ -44,8 +49,24 @@ const DEFAULTS = {
 };
 
 Component({
-  externalClasses: ['box-class'],
+  externalClasses: [
+    'box-class',
+    'indicator-class',
+    'mask-class',
+    'column-class',
+    'unit-class',
+  ],
   properties: {
+    /** 选择器样式
+     *
+     * 可选值：
+     * - 'picker'： 弹出式
+     * - 'picker-view'： 嵌入式
+     */
+    mode: {
+      type: String,
+      value: MODES.PICKER,
+    },
     /** 选择器开始时间 */
     start: {
       type: String,
@@ -148,8 +169,8 @@ Component({
       return values.length > comparedValues.length ? 1 : -1;
     },
     /** 动态生成可选择时间日期范围 */
-    generateRange() {
-      wx.nextTick(() => {
+    generateRange(async = true) {
+      const generator = () => {
         if (this.generating) return;
         this.generating = true;
         const {
@@ -226,7 +247,8 @@ Component({
           pickerValue: indexes,
         });
         this.generating = false;
-      });
+      };
+      return async ? wx.nextTick(generator) : generator();
     },
     getYears() {
       const [startYear] = this.data.startDateTime;
@@ -463,7 +485,7 @@ Component({
       const { column, value } = e.detail;
       const columnValue = this.data.range[column][value];
       this.data.columnsValue[column] = +columnValue.slice(0, columnValue.length - 1);
-      this.generateRange(column);
+      this.generateRange();
       this.triggerEvent('column', { column, value });
     },
     /** 确认选择 */
@@ -477,6 +499,15 @@ Component({
       this.setData({
         pickerValue: this.data.pickerValue,
       });
+    },
+    onViewChange(e) {
+      const { value } = e.detail;
+      this.data.columnsValue = this.data.range.map((item, index) => {
+        const columnValue = item[value[index]];
+        return +columnValue.slice(0, columnValue.length - 1);
+      });
+      this.generateRange(false);
+      this.onChange();
     },
     /** 取消选择 */
     onCancel() {

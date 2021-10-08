@@ -1,0 +1,16 @@
+.view-box {
+  width: 100%;
+  height: 300rpx;
+}
+.view-indicator {
+  height: 88rpx;
+}
+/* .view-mask {} */
+/* .view-column {} */
+.view-unit {
+  height: 88rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28rpx;
+}

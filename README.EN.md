@@ -159,12 +159,24 @@ Declare at `page.json` for side usage
 </datetime-picker>
 ```
 
+### Nested Style
+
+```html
+<datetime-picker
+  box-class="picker"
+  value="{{value}}"
+  mode="picker-view"
+  bindchange="setValue"
+/>
+```
+
 ## API
 
 ### Props
 
 | Attribute  | Type                                     | Description                                              | Default               |
 | :--------- | :--------------------------------------- | :------------------------------------------------------- | :-------------------- |
+| `mode`     | `picker\|picker-view`                    | How the component place in page                          | `picker`              |
 | `start`    | `string`                                 | The start of the valid date range, any valid Date string | `1900-01-01 00:00:00` |
 | `end`      | `string`                                 | The end of the valid date range, any valid Date string   | `2099-12-31 23:59:59` |
 | `value`    | `string`                                 | The selected datetime, any valid Date string             | -                     |
@@ -173,17 +185,21 @@ Declare at `page.json` for side usage
 
 ### Events
 
-| Event     | Description                          | Arguments                    |
-| :-------- | :----------------------------------- | :--------------------------- |
-| `column`  | Triggered when the column changes    | Changed column and its value |
-| `change`  | Triggered when the value is changed  | Changed value                |
-| `cancel`  | Triggered when selection is canceled | -                            |
+| Event     | Description                                                         | Arguments                    |
+| :-------- | :------------------------------------------------------------------ | :--------------------------- |
+| `column`  | Triggered when the column changes (only when `mode` is `picker`)    | Changed column and its value |
+| `change`  | Triggered when the value is changed  | Changed value                |                              |
+| `cancel`  | Triggered when selection is canceled (only when `mode` is `picker`) | -                            |
 
 ### External Classes
 
-| Class       | Description           |
-| :---------- | :-------------------- |
-| `box-class` | Root node's className |
+| Class             | Description                                                                 |
+| :---------------- | :-------------------------------------------------------------------------- |
+| `box-class`       | ClassName of the root node (picker)                                         |
+| `indicator-class` | ClassName of the checkbox in the picker (only when `mode` is `picker-view`) |
+| `mask-class`      | ClassName of the mask in the picker (only when `mode` is `picker-view`)     |
+| `column-class`    | ClassName of every column in the picker (only when `mode` is `picker-view`) |
+| `unit-class`      | ClassName of every unit in columns (only when `mode` is `picker-view`)      |
 
 ## Demo
 
@@ -290,6 +306,18 @@ Clone this repo, Run `npm i & npm run dev`. Import `miniprogram_dev` to Wechat D
     <view class="cell-title">秒为粒度</view>
     <view class="cell-value">{{second}}</view>
   </datetime-picker>
+  <view class="label">嵌入式选择器</view>
+  <view class="cell">
+    <view class="cell-title">下方选中时间日期</view>
+    <view class="cell-value">{{view}}</view>
+  </view>
+  <datetime-picker
+    box-class="cell-picker"
+    value="{{view}}"
+    mode="picker-view"
+    bindchange="setValue"
+    data-field="view"
+  />
 </view>
 ```
 
@@ -322,6 +350,7 @@ Page({
     hour: nowDatetime.slice(0, nowDatetime.indexOf(':')),
     minute: nowDatetime.slice(0, nowDatetime.lastIndexOf(':')),
     second: nowDatetime,
+    view: nowDatetime.slice(0, nowDatetime.lastIndexOf(':')),
   },
   setValue(e) {
     const { field } = e.currentTarget.dataset;

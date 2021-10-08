@@ -1,4 +1,30 @@
+<picker-view
+  wx:if="{{mode === 'picker-view'}}"
+  value="{{pickerValue}}"
+  bindchange="onViewChange"
+  class="view-box box-class"
+  indicator-class="view-indicator indicator-class"
+  mask-class="view-mask mask-class"
+>
+  <picker-view-column
+    class="view-column column-class"
+    wx:for="{{range}}"
+    wx:key="column"
+    wx:for-index="column"
+  >
+    <view
+      class="view-unit unit-class"
+      wx:for="{{item}}"
+      wx:key="row"
+      wx:for-index="row"
+    >
+      <text decode>{{item}}</text>
+    </view>
+  </picker-view-column>
+</picker-view>
+
 <picker
+  wx:else
   mode="multiSelector"
   range="{{range}}"
   disabled="{{disabled}}"

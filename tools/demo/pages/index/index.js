@@ -30,6 +30,7 @@ Page({
     hour: nowDatetime.slice(0, nowDatetime.indexOf(':')),
     minute: nowDatetime.slice(0, nowDatetime.lastIndexOf(':')),
     second: nowDatetime,
+    view: nowDatetime.slice(0, nowDatetime.lastIndexOf(':')),
   },
   setValue(e) {
     const { field } = e.currentTarget.dataset;

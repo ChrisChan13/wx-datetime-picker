@@ -91,4 +91,16 @@
     <view class="cell-title">秒为粒度</view>
     <view class="cell-value">{{second}}</view>
   </datetime-picker>
+  <view class="label">嵌入式选择器</view>
+  <view class="cell">
+    <view class="cell-title">下方选中时间日期</view>
+    <view class="cell-value">{{view}}</view>
+  </view>
+  <datetime-picker
+    box-class="cell-picker"
+    value="{{view}}"
+    mode="picker-view"
+    bindchange="setValue"
+    data-field="view"
+  />
 </view>

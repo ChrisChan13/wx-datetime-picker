@@ -14,8 +14,8 @@
   box-sizing: border-box;
 }
 .cell {
-  width: 100%;
-  height: 88rpx;
+  width: 100vw;
+  min-height: 88rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -64,4 +64,10 @@
 .cell-disabled .cell-value::after {
   border-top-color: #CCC;
   border-right-color: #CCC;
+}
+.cell-picker {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 10rpx;
+  background: #FFF;
 }

@@ -160,12 +160,25 @@ npm i wx-datetime-picker -S --production
 </datetime-picker>
 ```
 
+
+### 嵌入式选择器
+
+```html
+<datetime-picker
+  box-class="picker"
+  value="{{value}}"
+  mode="picker-view"
+  bindchange="setValue"
+/>
+```
+
 ## API
 
 ### 参数
 
 | 参数       | 类型                                     | 说明                                          | 默认值                 |
 | :--------- | :--------------------------------------- | :------------------------------------------- | :-------------------- |
+| `mode`     | `picker\|picker-view`                    | 选择器表现方式                                | `picker`              |
 | `start`    | `string`                                 | 表示有效日期时间范围的开始，任意合法 Date 字符串 | `1900-01-01 00:00:00` |
 | `end`      | `string`                                 | 表示有效日期时间范围的结束，任意合法 Date 字符串 | `2099-12-31 23:59:59` |
 | `value`    | `string`                                 | 表示选中的日期时间，任意合法 Date 字符串        | -                     |
@@ -174,17 +187,21 @@ npm i wx-datetime-picker -S --production
 
 ### 事件
 
-| 事件      | 说明                        | 参数           |
-| :-------- | :------------------------- | :------------- |
-| `column`  | 列改变时触发           	    | 改变的列和列的值 |
-| `change`  | value 改变时触发 change 事件 | 改变的值       |
-| `cancel`  | 取消选择时触发               | -             |
+| 事件      | 说明                                     | 参数           |
+| :-------- | :-------------------------------------- | :------------- |
+| `column`  | 列改变时触发 (仅 `mode` 为 `picker` 时)  | 改变的列和列的值 |
+| `change`  | value 改变时触发 change 事件             | 改变的值       |
+| `cancel`  | 取消选择时触发 (仅 `mode` 为 `picker` 时) | -             |
 
 ### 外部样式类
 
-| 类名        | 说明         |
-| :---------- | :-----------|
-| `box-class` | 根节点样式类 |
+| 类名              | 说明                                                 |
+| :---------------- | :-------------------------------------------------- |
+| `box-class`       | 根节点样式类                                         |
+| `indicator-class` | 选择器中间选中框样式类 (仅 `mode` 为 `picker-view` 时) |
+| `mask-class`      | 蒙层样式类 (仅 `mode` 为 `picker-view` 时)            |
+| `column-class`    | 选择器列样式类 (仅 `mode` 为 `picker-view` 时)        |
+| `unit-class`      | 选择器单元样式类 (仅 `mode` 为 `picker-view` 时)       |
 
 ## Demo
 
@@ -192,7 +209,7 @@ npm i wx-datetime-picker -S --production
 
 ### 效果预览
 
-![demo.png](https://github.com/ChrisChan13/wx-datetime-picker/blob/master/demo.png)
+![demo.png](https://cdn.jsdelivr.net/gh/ChrisChan13/wx-datetime-picker/demo.png)
 
 ### 代码演示
 
@@ -291,6 +308,18 @@ npm i wx-datetime-picker -S --production
     <view class="cell-title">秒为粒度</view>
     <view class="cell-value">{{second}}</view>
   </datetime-picker>
+  <view class="label">嵌入式选择器</view>
+  <view class="cell">
+    <view class="cell-title">下方选中时间日期</view>
+    <view class="cell-value">{{view}}</view>
+  </view>
+  <datetime-picker
+    box-class="cell-picker"
+    value="{{view}}"
+    mode="picker-view"
+    bindchange="setValue"
+    data-field="view"
+  />
 </view>
 ```
 
@@ -323,6 +352,7 @@ Page({
     hour: nowDatetime.slice(0, nowDatetime.indexOf(':')),
     minute: nowDatetime.slice(0, nowDatetime.lastIndexOf(':')),
     second: nowDatetime,
+    view: nowDatetime.slice(0, nowDatetime.lastIndexOf(':')),
   },
   setValue(e) {
     const { field } = e.currentTarget.dataset;
