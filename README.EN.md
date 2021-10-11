@@ -174,14 +174,14 @@ Declare at `page.json` for side usage
 
 ### Props
 
-| Attribute  | Type                                     | Description                                              | Default               |
-| :--------- | :--------------------------------------- | :------------------------------------------------------- | :-------------------- |
-| `mode`     | `picker\|picker-view`                    | How the component place in page                          | `picker`              |
-| `start`    | `string`                                 | The start of the valid date range, any valid Date string | `1900-01-01 00:00:00` |
-| `end`      | `string`                                 | The end of the valid date range, any valid Date string   | `2099-12-31 23:59:59` |
-| `value`    | `string`                                 | The selected datetime, any valid Date string             | -                     |
-| `fields`   | `year\|month\|day\|hour\|minute\|second` | The granularity of the picker                            | `minute`              |
-| `disabled` | `boolean`                                | Specifies whether to disable the component               | `false`               |
+| Attribute  | Type                                                 | Description                                              | Default               |
+| :--------- | :--------------------------------------------------- | :------------------------------------------------------- | :-------------------- |
+| `mode`     | `'picker'\|'picker-view'`                            | How the component place in page                          | `picker`              |
+| `start`    | `string`                                             | The start of the valid date range, any valid Date string | `1900-01-01 00:00:00` |
+| `end`      | `string`                                             | The end of the valid date range, any valid Date string   | `2099-12-31 23:59:59` |
+| `value`    | `string`                                             | The selected datetime, any valid Date string             | -                     |
+| `fields`   | `'year'\|'month'\|'day'\|'hour'\|'minute'\|'second'` | The granularity of the picker                            | `minute`              |
+| `disabled` | `boolean`                                            | Specifies whether to disable the component               | `false`               |
 
 ### Events
 
