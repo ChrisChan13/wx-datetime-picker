@@ -27,7 +27,6 @@ npm i wx-datetime-picker -S --production
 
 在 `app.json` 中配置为全局引入
 ```json
-// app.json
 {
   "usingComponents": {
     "datetime-picker": "wx-datetime-picker/index"
@@ -37,7 +36,6 @@ npm i wx-datetime-picker -S --production
 
 在 `page.json` 中配置为本页面使用
 ```json
-// somepage.json
 {
   "usingComponents": {
     "datetime-picker": "wx-datetime-picker/index"
@@ -50,8 +48,8 @@ npm i wx-datetime-picker -S --production
 ```html
 <datetime-picker
   box-class="custom-class"
-  start="{{start}}"
-  end="{{end}}"
+  min="{{min}}"
+  max="{{max}}"
   fields="{{fields}}"
   value="{{value}}"
   disabled="{{disabled}}"
@@ -94,8 +92,8 @@ npm i wx-datetime-picker -S --production
 ```html
 <datetime-picker
   box-class="cell"
-  start="{{start}}"
-  end="{{end}}"
+  min="{{min}}"
+  max="{{max}}"
   value="{{value}}"
   bindchange="setValue"
 >
@@ -176,32 +174,33 @@ npm i wx-datetime-picker -S --production
 
 ### 参数
 
-| 参数       | 类型                                                 | 说明                                          | 默认值                 |
-| :--------- | :--------------------------------------------------- | :------------------------------------------- | :-------------------- |
-| `mode`     | `'picker'\|'picker-view'`                            | 选择器表现方式                                | `picker`              |
-| `start`    | `string`                                             | 表示有效日期时间范围的开始，任意合法 Date 字符串 | `1900-01-01 00:00:00` |
-| `end`      | `string`                                             | 表示有效日期时间范围的结束，任意合法 Date 字符串 | `2099-12-31 23:59:59` |
-| `value`    | `string`                                             | 表示选中的日期时间，任意合法 Date 字符串        | -                     |
-| `fields`   | `'year'\|'month'\|'day'\|'hour'\|'minute'\|'second'` | 表示选择器的粒度                               | `minute`              |
-| `disabled` | `boolean`                                            | 是否禁用                                      | `false`               |
+| 参数         | 类型                                                 | 说明                                                  | 默认值                 |
+| :----------- | :--------------------------------------------------- | :--------------------------------------------------- | :-------------------- |
+| `mode`       | `'picker'\|'picker-view'`                            | 选择器表现方式                                        | `picker`              |
+| `min`        | `string`                                             | 表示有效日期时间范围的开始，任意合法 Date 字符串         | `1900-01-01 00:00:00` |
+| `max`        | `string`                                             | 表示有效日期时间范围的结束，任意合法 Date 字符串         | `2099-12-31 23:59:59` |
+| `value`      | `string`                                             | 表示选中的日期时间，任意合法 Date 字符串                | -                     |
+| `fields`     | `'year'\|'month'\|'day'\|'hour'\|'minute'\|'second'` | 表示选择器的粒度                                       | `minute`              |
+| `disabled`   | `boolean`                                            | 是否禁用                                              | `false`               |
+| `headerText` | `string`                                             | 选择器的标题，仅安卓可用 (仅 `mode` 为 `picker` 时生效)  |-                     |
 
 ### 事件
 
-| 事件      | 说明                                     | 参数           |
-| :-------- | :-------------------------------------- | :------------- |
-| `column`  | 列改变时触发 (仅 `mode` 为 `picker` 时)  | 改变的列和列的值 |
-| `change`  | value 改变时触发 change 事件             | 改变的值       |
-| `cancel`  | 取消选择时触发 (仅 `mode` 为 `picker` 时) | -             |
+| 事件      | 说明                                         | 参数           |
+| :-------- | :------------------------------------------ | :------------- |
+| `column`  | 列改变时触发 (仅 `mode` 为 `picker` 时生效)   | 改变的列和列的值 |
+| `change`  | value 改变时触发 change 事件                 | 改变的值        |
+| `cancel`  | 取消选择时触发 (仅 `mode` 为 `picker` 时生效) | -              |
 
 ### 外部样式类
 
-| 类名              | 说明                                                 |
-| :---------------- | :-------------------------------------------------- |
-| `box-class`       | 根节点样式类                                         |
-| `indicator-class` | 选择器中间选中框样式类 (仅 `mode` 为 `picker-view` 时) |
-| `mask-class`      | 蒙层样式类 (仅 `mode` 为 `picker-view` 时)            |
-| `column-class`    | 选择器列样式类 (仅 `mode` 为 `picker-view` 时)        |
-| `unit-class`      | 选择器单元样式类 (仅 `mode` 为 `picker-view` 时)       |
+| 类名              | 说明                                                     |
+| :---------------- | :------------------------------------------------------ |
+| `box-class`       | 根节点样式类                                             |
+| `indicator-class` | 选择器中间选中框样式类 (仅 `mode` 为 `picker-view` 时生效) |
+| `mask-class`      | 蒙层样式类 (仅 `mode` 为 `picker-view` 时生效)            |
+| `column-class`    | 选择器列样式类 (仅 `mode` 为 `picker-view` 时生效)        |
+| `unit-class`      | 选择器单元样式类 (仅 `mode` 为 `picker-view` 时生效)       |
 
 ## Demo
 
@@ -238,8 +237,8 @@ npm i wx-datetime-picker -S --production
   </datetime-picker>
   <datetime-picker
     box-class="cell"
-    start="{{start}}"
-    end="{{end}}"
+    min="{{min}}"
+    max="{{max}}"
     value="{{customize}}"
     bindchange="setValue"
     data-field="customize"
@@ -341,8 +340,8 @@ const nowDatetime = `${nowYear}-${nowMonth}-${nowDay} ${nowHour}:${nowMinute}:${
 
 Page({
   data: {
-    start: '2010-01-01 00:00:00',
-    end: '2030-12-31 23:59:59',
+    min: '2010-01-01 00:00:00',
+    max: '2030-12-31 23:59:59',
     now: nowDatetime.slice(0, nowDatetime.lastIndexOf(':')),
     value: nowDatetime.slice(0, nowDatetime.lastIndexOf(':')),
     customize: nowDatetime.slice(0, nowDatetime.lastIndexOf(':')),

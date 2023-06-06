@@ -1,6 +1,6 @@
 <picker-view
   wx:if="{{mode === 'picker-view'}}"
-  value="{{pickerValue}}"
+  value="{{indexes}}"
   bindchange="onViewChange"
   class="view-box box-class"
   indicator-class="view-indicator indicator-class"
@@ -8,7 +8,7 @@
 >
   <picker-view-column
     class="view-column column-class"
-    wx:for="{{range}}"
+    wx:for="{{ranges}}"
     wx:key="column"
     wx:for-index="column"
   >
@@ -26,9 +26,10 @@
 <picker
   wx:else
   mode="multiSelector"
-  range="{{range}}"
+  range="{{ranges}}"
+  value="{{indexes}}"
   disabled="{{disabled}}"
-  value="{{pickerValue}}"
+  header-text="{{headerText}}"
   bindcolumnchange="onColumnChange"
   bindchange="onChange"
   bindcancel="onCancel"

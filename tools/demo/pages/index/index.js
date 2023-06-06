@@ -19,8 +19,8 @@ const nowDatetime = `${nowYear}-${nowMonth}-${nowDay} ${nowHour}:${nowMinute}:${
 
 Page({
   data: {
-    start: '2010-01-01 00:00:00',
-    end: '2030-12-31 23:59:59',
+    min: '2010-01-01 00:00:00',
+    max: '2030-12-31 23:59:59',
     now: nowDatetime.slice(0, nowDatetime.lastIndexOf(':')),
     value: nowDatetime.slice(0, nowDatetime.lastIndexOf(':')),
     customize: nowDatetime.slice(0, nowDatetime.lastIndexOf(':')),

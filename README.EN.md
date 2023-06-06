@@ -26,7 +26,6 @@ Click the menu bar in Weixin DevTools, and go to **Tools** > **Build npm**, then
 
 Declare at `app.json` for global usage
 ```json
-// app.json
 {
   "usingComponents": {
     "datetime-picker": "wx-datetime-picker/index"
@@ -36,7 +35,6 @@ Declare at `app.json` for global usage
 
 Declare at `page.json` for side usage
 ```json
-// somepage.json
 {
   "usingComponents": {
     "datetime-picker": "wx-datetime-picker/index"
@@ -49,8 +47,8 @@ Declare at `page.json` for side usage
 ```html
 <datetime-picker
   box-class="custom-class"
-  start="{{start}}"
-  end="{{end}}"
+  min="{{min}}"
+  max="{{max}}"
   fields="{{fields}}"
   value="{{value}}"
   disabled="{{disabled}}"
@@ -93,8 +91,8 @@ Declare at `page.json` for side usage
 ```html
 <datetime-picker
   box-class="cell"
-  start="{{start}}"
-  end="{{end}}"
+  min="{{min}}"
+  max="{{max}}"
   value="{{value}}"
   bindchange="setValue"
 >
@@ -174,32 +172,33 @@ Declare at `page.json` for side usage
 
 ### Props
 
-| Attribute  | Type                                                 | Description                                              | Default               |
-| :--------- | :--------------------------------------------------- | :------------------------------------------------------- | :-------------------- |
-| `mode`     | `'picker'\|'picker-view'`                            | How the component place in page                          | `picker`              |
-| `start`    | `string`                                             | The start of the valid date range, any valid Date string | `1900-01-01 00:00:00` |
-| `end`      | `string`                                             | The end of the valid date range, any valid Date string   | `2099-12-31 23:59:59` |
-| `value`    | `string`                                             | The selected datetime, any valid Date string             | -                     |
-| `fields`   | `'year'\|'month'\|'day'\|'hour'\|'minute'\|'second'` | The granularity of the picker                            | `minute`              |
-| `disabled` | `boolean`                                            | Specifies whether to disable the component               | `false`               |
-
+| Attribute    | Type                                                 | Description                                              | Default               |
+| :------------ | :-------------------------------------------------- | :------------------------------------------------------- | :-------------------- |
+| `mode`       | `'picker'\|'picker-view'`                            | How the component place in page                          | `picker`              |
+| `min`        | `string`                                             | The min of the valid date range, any valid Date string   | `1900-01-01 00:00:00` |
+| `max`        | `string`                                             | The max of the valid date range, any valid Date string   | `2099-12-31 23:59:59` |
+| `value`      | `string`                                             | The selected datetime, any valid Date string             | -                     |
+| `fields`     | `'year'\|'month'\|'day'\|'hour'\|'minute'\|'second'` | The granularity of the picker                            | `minute`              |
+| `disabled`   | `boolean`                                            | Specifies whether to disable the component               | `false`               |
+| `headerText` | `string`                                             | Selector Title, available for Android only               |
+-                     |
 ### Events
 
-| Event     | Description                                                         | Arguments                    |
-| :-------- | :------------------------------------------------------------------ | :--------------------------- |
-| `column`  | Triggered when the column changes (only when `mode` is `picker`)    | Changed column and its value |
-| `change`  | Triggered when the value is changed  | Changed value                |                              |
-| `cancel`  | Triggered when selection is canceled (only when `mode` is `picker`) | -                            |
+| Event     | Description                                                                   | Arguments                    |
+| :-------- | :---------------------------------------------------------------------------- | :--------------------------- |
+| `column`  | Triggered when the column changes (available when `mode` is `picker` only)    | Changed column and its value |
+| `change`  | Triggered when the value is changed                                           | Changed value                |
+| `cancel`  | Triggered when selection is canceled (available when `mode` is `picker` only) | -                            |
 
 ### External Classes
 
-| Class             | Description                                                                 |
-| :---------------- | :-------------------------------------------------------------------------- |
-| `box-class`       | ClassName of the root node (picker)                                         |
-| `indicator-class` | ClassName of the checkbox in the picker (only when `mode` is `picker-view`) |
-| `mask-class`      | ClassName of the mask in the picker (only when `mode` is `picker-view`)     |
-| `column-class`    | ClassName of every column in the picker (only when `mode` is `picker-view`) |
-| `unit-class`      | ClassName of every unit in columns (only when `mode` is `picker-view`)      |
+| Class             | Description                                                                           |
+| :---------------- | :------------------------------------------------------------------------------------ |
+| `box-class`       | ClassName of the root node (`<picker />` or `<picker-view />`)                        |
+| `indicator-class` | ClassName of the checkbox in the picker (available when `mode` is `picker-view` only) |
+| `mask-class`      | ClassName of the mask in the picker (available when `mode` is `picker-view` only)     |
+| `column-class`    | ClassName of every column in the picker (available when `mode` is `picker-view` only) |
+| `unit-class`      | ClassName of every unit in columns (available when `mode` is `picker-view` only)      |
 
 ## Demo
 
@@ -236,8 +235,8 @@ Clone this repo, Run `npm i & npm run dev`. Import `miniprogram_dev` to Wechat D
   </datetime-picker>
   <datetime-picker
     box-class="cell"
-    start="{{start}}"
-    end="{{end}}"
+    min="{{min}}"
+    max="{{max}}"
     value="{{customize}}"
     bindchange="setValue"
     data-field="customize"
@@ -339,8 +338,8 @@ const nowDatetime = `${nowYear}-${nowMonth}-${nowDay} ${nowHour}:${nowMinute}:${
 
 Page({
   data: {
-    start: '2010-01-01 00:00:00',
-    end: '2030-12-31 23:59:59',
+    min: '2010-01-01 00:00:00',
+    max: '2030-12-31 23:59:59',
     now: nowDatetime.slice(0, nowDatetime.lastIndexOf(':')),
     value: nowDatetime.slice(0, nowDatetime.lastIndexOf(':')),
     customize: nowDatetime.slice(0, nowDatetime.lastIndexOf(':')),

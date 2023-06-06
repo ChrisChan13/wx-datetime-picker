@@ -21,8 +21,8 @@
   </datetime-picker>
   <datetime-picker
     box-class="cell"
-    start="{{start}}"
-    end="{{end}}"
+    min="{{min}}"
+    max="{{max}}"
     value="{{customize}}"
     bindchange="setValue"
     data-field="customize"
